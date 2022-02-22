@@ -1,6 +1,6 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import settings
+import settings, planets_feature
 
 # Setting up logging configuration
 logging.basicConfig(filename='bot.log', level=logging.INFO)
@@ -15,6 +15,17 @@ PROXY = {'proxy_url': settings.PROXY_URL,
 def greet_user(update, contex):
     print('Command /start')
     update.message.reply_text('Greetings!!! You sent command /start!')
+
+# Planet function
+def planet(update, contex):
+    user_text = update.message.text
+    user_planet = user_text.split()
+    if len(user_planet) > 1:
+        answer_text = planets_feature.check_constellation(user_planet[1].capitalize())
+    else:
+        answer_text = "Please, text planet's name after command /planet"
+    print(answer_text)
+    update.message.reply_text(answer_text)
 
 # Text function
 def talk_to_me(update, contex):
@@ -36,6 +47,7 @@ def main():
     disp = mybot.dispatcher
     # Configuring handlers for commands
     disp.add_handler(CommandHandler('start', greet_user))
+    disp.add_handler(CommandHandler('planet', planet))
     disp.add_handler(MessageHandler(Filters.text, talk_to_me))
     disp.add_handler(MessageHandler(Filters.photo, picture_answer))
 
