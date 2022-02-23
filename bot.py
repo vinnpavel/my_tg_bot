@@ -41,7 +41,7 @@ def picture_answer(update, contex):
 # Main function
 def main():
     # Initialisation of bot using Updater with bot's key
-    mybot = Updater(settings.API_KEY, use_context=True, request_kwargs=PROXY)
+    mybot = Updater(settings.API_KEY, use_context=True)#, request_kwargs=PROXY)
     
     # Setting up dispatcher
     disp = mybot.dispatcher

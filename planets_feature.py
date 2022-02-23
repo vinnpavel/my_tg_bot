@@ -40,4 +40,6 @@ def check_constellation(body):
         constell = ephem.constellation(moon_coordinates)
         return f'{body} is a Moon and located in {constell[1]} constellation'
     else:
-        return f"Sorry, can't identify {body} as a planet or moon"
+        return f'''Sorry, can't identify "{body}" as a planet or moon.
+Please, make sure, that you enter an object from the list of Planets:\n{planets_tuple}
+or from the list of moons: {moons_tuple}.'''
